@@ -1,5 +1,6 @@
 export const NAVIGATION = {
   home: 'Home',
-  login: 'Login',
-  profile: 'Profile',
+  myList: 'MyList',
+  movieDetail: 'MovieDetail',
+  search: 'Search',
 };
