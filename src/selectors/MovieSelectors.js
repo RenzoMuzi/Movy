@@ -1,7 +1,11 @@
 export const getTrendingMovies = state => {
-  return Object.values(state.movies.trendingMovies);
+  return state.movies.trendingMovies
+    ? Object.values(state.movies.trendingMovies)
+    : [];
 };
 
 export const getRecentlyMovies = state => {
-  return Object.values(state.movies.recentlyMovies);
+  return state.movies.recentlyMovies
+    ? Object.values(state.movies.recentlyMovies)
+    : [];
 };
