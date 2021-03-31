@@ -5,7 +5,7 @@ export const en = {
   },
   home: {
     header: 'Home',
-    message: 'Welcome',
+    message: 'Hello World',
     variant: 'App variant: ',
   },
   login: {
