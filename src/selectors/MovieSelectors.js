@@ -9,3 +9,7 @@ export const getRecentlyMovies = state => {
     ? Object.values(state.movies.recentlyMovies)
     : [];
 };
+
+export const getMyMovieList = state => {
+  return state.movies.myList || []
+}

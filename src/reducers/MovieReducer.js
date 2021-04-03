@@ -1,7 +1,6 @@
 import { TYPES } from '@/actions/MovieActions';
 
 export const movieReducer = (state = {}, { payload, type }) => {
-  console.log('payload:', payload);
   switch (type) {
     case TYPES.TRENDING_MOVIE_SUCCESS:
       return { ...state, trendingMovies: payload.trendingMovies };

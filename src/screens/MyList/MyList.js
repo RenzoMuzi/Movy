@@ -5,10 +5,10 @@ import { useDispatch } from 'react-redux';
 import { logout } from '@/actions/UserActions';
 import { Button } from '@/components';
 import { strings } from '@/localization';
-import { styles } from '@/screens/Profile/Profile.styles';
+import { styles } from '@/screens/MyList/MyList.styles';
 import { TextStyles } from '@/theme';
 
-export function Profile() {
+export function MyList() {
   const { colors } = useTheme();
   const dispatch = useDispatch();
 
@@ -19,9 +19,9 @@ export function Profile() {
   return (
     <View style={styles.container}>
       <Text style={[TextStyles.title, styles.title, { color: colors.text }]}>
-        {strings.profile.message}
+        {strings.myList.message}
       </Text>
-      <Button title={strings.profile.logout} onPress={logoutUser} />
+      <Button title={strings.myList.logout} onPress={logoutUser} />
     </View>
   );
 }
