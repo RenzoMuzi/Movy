@@ -11,5 +11,7 @@ export const getRecentlyMovies = state => {
 };
 
 export const getMyMovieList = state => {
-  return state.movies.myList || []
+  // return state.movies.myList || []
+  const unasPelis = state.movies.recentlyMovies; // for testint purposes
+  return unasPelis && unasPelis.slice(0, 4);
 }

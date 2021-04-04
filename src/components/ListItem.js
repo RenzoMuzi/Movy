@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from 'react-native';
+import { NAVIGATION } from '@/constants';
 
 const styles = StyleSheet.create({
   container: {
@@ -21,11 +22,11 @@ const styles = StyleSheet.create({
   },
 });
 
-export function ListItem({ item, style, ...rest }) {
+export function ListItem({ item, style, navigation, ...rest }) {
   const { colors } = useTheme();
 
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={()=> navigation.navigate(NAVIGATION.movieDetail)}>
       <ImageBackground
         source={{ url: item.Poster }}
         style={styles.posterBackground}
