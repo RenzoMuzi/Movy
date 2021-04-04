@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export function HorizontalList({ items, style, title, navigation, ...rest }) {
+export function HorizontalList({ items, style, title, ...rest }) {
   const { colors } = useTheme();
 
   return (
@@ -23,7 +23,7 @@ export function HorizontalList({ items, style, title, navigation, ...rest }) {
       <Text style={[styles.heading, { color: colors.primary }]}>{title}</Text>
       <ScrollView contentContainerStyle={styles.container} horizontal>
         {items.map((item, index) => (
-          <ListItem key={index} item={item} navigation={navigation} />
+          <ListItem key={index} item={item} />
         ))}
       </ScrollView>
     </View>

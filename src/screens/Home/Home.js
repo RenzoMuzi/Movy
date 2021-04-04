@@ -1,4 +1,4 @@
-import { useTheme, useNavigation } from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 import React, { useState, useEffect } from 'react';
 import { Text, ScrollView, View } from 'react-native';
 import { Config } from 'react-native-config';
@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   getRecentlyMovies,
   getTrendingMovies,
-  getMyMovieList,
+  getMyMovieList
 } from '@/selectors/MovieSelectors';
 import { getRecently, getTrending } from '@/actions/MovieActions';
 import { HorizontalList } from '@/components/HorizontalList';
@@ -17,7 +17,6 @@ import { strings } from '@/localization';
 export function Home() {
   const { colors } = useTheme();
   const dispatch = useDispatch();
-  const navigation = useNavigation();
 
   useEffect(() => {
     dispatch(getRecently());
@@ -41,9 +40,11 @@ export function Home() {
       <View style={{ backgroundColor: 'red' }}>
         <Text style={[TextStyles.text, { color: colors.text }]}>Featured</Text>
       </View>
-      <HorizontalList title="Recently added" items={recentlyMovies} navigation={navigation} />
-      <HorizontalList title="Trending movies" items={trendingMovies} navigation={navigation} />
-      {(myMovies.length > 0) && <HorizontalList title="My List" items={myMovies} navigation={navigation} />}
+      <HorizontalList title="Recently added" items={recentlyMovies} />
+      <HorizontalList title="Trending movies" items={trendingMovies} />
+      {myMovies.length > 0 && (
+        <HorizontalList title="My List" items={myMovies} />
+      )}
     </ScrollView>
   );
 }
