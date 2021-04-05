@@ -39,6 +39,11 @@ export function Home() {
         icon: addIcon,
         text: 'My List',
       },
+      {
+        color: 'white',
+        icon: infoIcon,
+        text: 'Info',
+      },
     ];
   };
 

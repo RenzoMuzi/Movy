@@ -25,13 +25,11 @@ const styles = StyleSheet.create({
     right: 0,
   },
   posterBackground: {
-    alignItems: 'center',
     flex: 1,
     justifyContent: 'flex-end',
   },
   movieTitle: {
     display: 'flex',
-    alignItems: 'center',
     color: 'lightgray',
     fontSize: 20,
     fontWeight: 'bold',

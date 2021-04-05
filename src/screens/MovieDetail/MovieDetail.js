@@ -44,6 +44,9 @@ export function MovieDetail({ route }) {
   );
 
   const movieDetails = useSelector(state => getMovieDetailsSelector(state));
+  
+  console.log('movieDetails:', movieDetails)
+
   const {
     title,
     poster_path,
@@ -82,7 +85,7 @@ export function MovieDetail({ route }) {
         <Text style={styles.votesAverage}>{voteAverage}</Text>
       </View>
       <View style={styles.genres}>
-        {genres.map((genre, i) => (
+        {genres && genres.map((genre, i) => (
           <View>
             <Text style={styles.genre}>{`${genre.name}${
               i !== genres.length - 1 ? ' | ' : ''
