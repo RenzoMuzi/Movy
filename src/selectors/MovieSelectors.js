@@ -13,3 +13,7 @@ export const getMyMovieList = state => {
   // return unasPelis && unasPelis.slice(0, 4);
   return [];
 };
+
+export const getMovieDetails = state => {
+  return state.movies.movieDetails || {}
+}

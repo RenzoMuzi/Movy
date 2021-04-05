@@ -27,7 +27,6 @@ export function AppNavigator() {
     >
       <Tab.Screen name={NAVIGATION.home} component={HomeNavigator} />
       <Tab.Screen name={NAVIGATION.myList} component={MyListNavigator} />
-      <Tab.Screen name={NAVIGATION.movieDetail} component={MovieDetailNavigator} />
       <Tab.Screen name={NAVIGATION.search} component={SearchNavigator} />
     </Tab.Navigator>
   );

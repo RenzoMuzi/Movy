@@ -6,6 +6,8 @@ export const movieReducer = (state = {}, { payload, type }) => {
       return { ...state, trendingMovies: payload };
     case TYPES.RECENTLY_MOVIE_SUCCESS:
       return { ...state, recentlyMovies: payload };
+    case TYPES.MOVIE_DETAILS_SUCCESS:
+      return { ...state, movieDetails: payload };
     default:
       return state;
   }
