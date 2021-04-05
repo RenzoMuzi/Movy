@@ -8,6 +8,8 @@ export const movieReducer = (state = {}, { payload, type }) => {
       return { ...state, recentlyMovies: payload };
     case TYPES.MOVIE_DETAILS_PENDING:
       return { ...state, detailsIsLoading: true };
+    case TYPES.FEATURED_MOVIE:
+      return { ...state, featuredMovie: payload };
     case TYPES.MOVIE_DETAILS_SUCCESS:
       return { ...state, movieDetails: payload, detailsIsLoading: false };
     case TYPES.MOVIE_DETAILS_REJECTED:

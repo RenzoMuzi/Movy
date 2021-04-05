@@ -38,6 +38,17 @@ export const getMovies = async TYPE_MOVIE => {
   }
 };
 
+export const getFeaturedMovie = async () => {
+  try {
+    const featuredMovie = await queryMovies('movie/now_playing', {
+      api_key: THE_MOVIE_DB_API_KEY,
+    });
+    return featuredMovie[0];
+  } catch (error) {
+    console.log('error', error);
+  }
+}
+
 export const getMovieDetails = async movie_id => {
   try {
     const response = await axios.get(`${THE_MOVIE_DB}/movie/${movie_id}`, {

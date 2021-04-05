@@ -9,7 +9,6 @@ const tabIcon = {
   [NAVIGATION.myList]: myListIcon,
   [NAVIGATION.search]: searchIcon,
 };
-
 export function TabBarIcon({ color, routeName }) {
   return (
     <Image

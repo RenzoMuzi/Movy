@@ -2,6 +2,8 @@ export const getTrendingMovies = state => state.movies.trendingMovies || [];
 
 export const getRecentlyMovies = state => state.movies.recentlyMovies || [];
 
+export const getFeaturedMovie = state => state.movies.featuredMovie || {};
+
 export const getMyMovieList = state => {
   // return state.movies.myList || []
   // const unasPelis = state.movies.recentlyMovies; // for testint purposes
