@@ -6,7 +6,7 @@ const THE_MOVIE_DB_API_KEY = 'd73cddc6c5f510c3c4470a976bc0c6ad';
 const getOptions = (path, params = {}) => ({
   method: 'GET',
   url: `${THE_MOVIE_DB}/${path}`,
-  params,
+  params
 });
 
 const queryMovies = (path, queryParams) => {
@@ -26,13 +26,13 @@ export const getMovies = async TYPE_MOVIE => {
         language: 'en-US',
         sort_by: 'popularity.desc',
         include_video: false,
-        page: '1',
+        page: '1'
       });
       return trendingMovies;
     case 'RECENTLY_MOVIES':
       const recentlyMovies = await queryMovies('trending/movie/week', {
         api_key: THE_MOVIE_DB_API_KEY,
-        page: '1',
+        page: '1'
       });
       return recentlyMovies;
   }
@@ -48,6 +48,6 @@ export const getMovieDetails = async movie_id => {
     const movieDetails = response?.data;
     return movieDetails;
   } catch (error) {
-    console.log('error', error);
+    throw error;
   }
 };
