@@ -18,10 +18,13 @@ export function MovieDetail() {
 
   return (
     <View style={styles.container}>
-      <Text style={[TextStyles.title, styles.title, { color: colors.text }]}>
+      <Text>
+        Soy la view de Movie Details
+      </Text>
+      {/* <Text style={[TextStyles.title, styles.title, { color: colors.text }]}>
         {strings.myList.message}
       </Text>
-      <Button title={strings.myList.logout} onPress={logoutUser} />
+      <Button title={strings.myList.logout} onPress={logoutUser} /> */}
     </View>
   );
 }
