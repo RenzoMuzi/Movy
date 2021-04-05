@@ -18,20 +18,6 @@ const queryMovies = (path, queryParams) => {
     });
 };
 
-export const getMovieDetails = async movie_id => {
-  try {
-    const response = await axios.get(`${THE_MOVIE_DB}${movie_id}`, {
-      params: {
-        api_key: THE_MOVIE_DB_API_KEY,
-      },
-    });
-    const movieDetails = response?.data;
-    return movieDetails;
-  } catch (error) {
-    console.log('error', error);
-  }
-};
-
 export const getMovies = async TYPE_MOVIE => {
   switch (TYPE_MOVIE) {
     case 'TRENDING_MOVIES':
@@ -49,5 +35,19 @@ export const getMovies = async TYPE_MOVIE => {
         page: '1',
       });
       return recentlyMovies;
+  }
+};
+
+export const getMovieDetails = async movie_id => {
+  try {
+    const response = await axios.get(`${THE_MOVIE_DB}${movie_id}`, {
+      params: {
+        api_key: THE_MOVIE_DB_API_KEY
+      }
+    });
+    const movieDetails = response?.data;
+    return movieDetails;
+  } catch (error) {
+    console.log('error', error);
   }
 };
