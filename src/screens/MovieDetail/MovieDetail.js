@@ -19,6 +19,7 @@ import { POSTER_URL } from '@/constants/url';
 import star from '@/assets/ic_ui/ic_star.png';
 import { TextStyles } from '@/theme';
 import { styles } from '@/screens/MovieDetail/MovieDetail.styles';
+import { Spinner } from '@/components/Spinner';
 
 export function MovieDetail({ route }) {
   const { colors } = useTheme();
@@ -55,6 +56,10 @@ export function MovieDetail({ route }) {
     vote_average: voteAverage
   } = movieDetails;
   const poster = `${POSTER_URL}${poster_path}`;
+
+  if(isDetailsIsLoading || refreshing) {
+    return <Spinner />
+  }
 
   return (
     <ScrollView
