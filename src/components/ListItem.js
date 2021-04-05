@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ImageBackground
 } from 'react-native';
-import { NAVIGATION } from '@/constants';
+import { GET_IMAGE_IMDB, NAVIGATION } from '@/constants';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,7 +32,7 @@ export function ListItem({ item, style, ...rest }) {
       onPress={() => navigation.navigate(NAVIGATION.movieDetail)}
     >
       <ImageBackground
-        source={{ url: item.Poster }}
+        source={{ url: GET_IMAGE_IMDB(item.poster_path) }}
         style={styles.posterBackground}
       >
         <Text></Text>

@@ -1,27 +1,19 @@
 import axios from 'axios';
 
-const RAPID_API_KEY = '0ed69a40c2msh2331579c977c637p1e21dbjsnaf8fd8774a2f';
-const RAPID_HOST = 'movies-tvshows-data-imdb.p.rapidapi.com';
-const RAPID_HOST_ALTERNATIVE = 'movie-database-imdb-alternative.p.rapidapi.com';
-const IMDB_SERVICE = 'https://movie-database-imdb-alternative.p.rapidapi.com/';
-const IMDB_ALTERNATIVE = 'https://movie-database-imdb-alternative.p.rapidapi.com/';
+const THE_MOVIE_DB = 'https://api.themoviedb.org/3';
+const THE_MOVIE_DB_API_KEY = 'd73cddc6c5f510c3c4470a976bc0c6ad';
 
-const getOptions = (params = {}, url = IMDB_SERVICE, host = RAPID_HOST) => ({
+const getOptions = (path, params = {}) => ({
   method: 'GET',
-  url,
+  url: `${THE_MOVIE_DB}/${path}`,
   params,
-  headers: {
-    'x-rapidapi-key': RAPID_API_KEY,
-    'x-rapidapi-host': host,
-  },
 });
 
-const queryMovies = queryParams => {
+const queryMovies = (path, queryParams) => {
   return axios
-    .request(getOptions(queryParams))
-    .then(response => response.data.movie_results.map(movie => movie.imdb_id))
+    .request(getOptions(path, queryParams))
+    .then(response => response.data.results)
     .catch(error => {
-      console.error(error);
       return error;
     });
 };
@@ -29,14 +21,11 @@ const queryMovies = queryParams => {
 const queryMovieDetail = imbd_id => {
   return axios
     .request(
-      getOptions(
-        {
-          i: imbd_id,
-          r: 'json',
-        },
-        IMDB_ALTERNATIVE,
-        RAPID_HOST_ALTERNATIVE
-      )
+      getOptions('find', {
+        api_key: THE_MOVIE_DB_API_KEY,
+        external_source: 'imdb_id',
+        external_id: imbd_id,
+      })
     )
     .then(response => response.data)
     .catch(error => {
@@ -48,20 +37,19 @@ const queryMovieDetail = imbd_id => {
 export const getMovies = async TYPE_MOVIE => {
   switch (TYPE_MOVIE) {
     case 'TRENDING_MOVIES':
-      const trendingMovies = await queryMovies({
-        type: 'get-trending-movies',
+      const trendingMovies = await queryMovies('discover/movie', {
+        api_key: THE_MOVIE_DB_API_KEY,
+        language: 'en-US',
+        sort_by: 'popularity.desc',
+        include_video: false,
         page: '1',
       });
-      return Promise.all(
-        trendingMovies.map(movie_id => queryMovieDetail(movie_id))
-      ).then(values => values);
+      return trendingMovies;
     case 'RECENTLY_MOVIES':
-      const recentlyMovies = await queryMovies({
-        type: 'get-recently-added-movies',
-        page: '2',
+      const recentlyMovies = await queryMovies('trending/movie/week', {
+        api_key: THE_MOVIE_DB_API_KEY,
+        page: '1',
       });
-      return Promise.all(
-        recentlyMovies.map(movie_id => queryMovieDetail(movie_id))
-      ).then(values => values);
+      return recentlyMovies;
   }
 };

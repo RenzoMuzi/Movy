@@ -6,13 +6,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   getRecentlyMovies,
   getTrendingMovies,
-  getMyMovieList
+  getMyMovieList,
 } from '@/selectors/MovieSelectors';
 import { getRecently, getTrending } from '@/actions/MovieActions';
 import { HorizontalList } from '@/components/HorizontalList';
+import { FeaturedItem } from '@/components/FeaturedItem';
 import { TextStyles } from '@/theme';
 import { styles } from '@/screens/Home/Home.styles';
 import { strings } from '@/localization';
+import { storage } from '@/storage';
 
 export function Home() {
   const { colors } = useTheme();
@@ -21,30 +23,19 @@ export function Home() {
   useEffect(() => {
     dispatch(getRecently());
     dispatch(getTrending());
+    // console.log('trending movies Storage: ', storage.getMap('trendingMovies'));
   }, []);
 
-  const trendingMovies = useSelector(state => {
-    return getTrendingMovies(state);
-  });
+  const trendingMovies = useSelector(state => getTrendingMovies(state));
 
-  const recentlyMovies = useSelector(state => {
-    return getRecentlyMovies(state);
-  });
+  const recentlyMovies = useSelector(state => getRecentlyMovies(state));
 
-  const myMovies = useSelector(state => {
-    return getMyMovieList(state);
-  });
 
   return (
     <ScrollView style={[{ backgroundColor: colors.background }]}>
-      <View style={{ backgroundColor: 'red' }}>
-        <Text style={[TextStyles.text, { color: colors.text }]}>Featured</Text>
-      </View>
+      <FeaturedItem item={trendingMovies[0]} />
       <HorizontalList title="Recently added" items={recentlyMovies} />
       <HorizontalList title="Trending movies" items={trendingMovies} />
-      {myMovies.length > 0 && (
-        <HorizontalList title="My List" items={myMovies} />
-      )}
     </ScrollView>
   );
 }

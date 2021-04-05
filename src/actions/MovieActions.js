@@ -1,4 +1,5 @@
 import { getMovies } from '@/controllers/MovieController';
+import { storage } from '@/storage';
 
 export const TYPES = {
   MOVIE_REQUEST: 'MOVIE_REQUEST',
@@ -17,7 +18,7 @@ const trendingMovies = movies => {
 const recentlyMovies = movies => {
   return {
     type: TYPES.RECENTLY_MOVIE_SUCCESS,
-    payload: movies ,
+    payload: movies,
   };
 };
 
