@@ -5,19 +5,11 @@ export const en = {
   },
   home: {
     header: 'Home',
-    message: 'Welcome',
+    message: 'Hello World',
     variant: 'App variant: ',
   },
-  login: {
-    username: 'Username',
-    usernameHint: 'Enter your username',
-    button: 'Login',
-    password: 'Password',
-    passwordHint: 'Enter your password',
-    invalidCredentials: 'Invalid Username/Password',
-  },
-  profile: {
-    header: 'Profile',
+  myList: {
+    header: 'myList',
     logout: 'Logout',
     message: 'This screen has the iOS native large header.',
   },
