@@ -5,6 +5,8 @@ import { TabBarIcon } from '@/components';
 import { NAVIGATION } from '@/constants';
 import { HomeNavigator } from '@/navigation/HomeNavigator';
 import { MyListNavigator } from '@/navigation/MyListNavigator';
+import { MovieDetailNavigator } from '@/navigation/MovieDetailNavigator';
+import { SearchNavigator } from '@/navigation/SearchNavigator';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,6 +27,8 @@ export function AppNavigator() {
     >
       <Tab.Screen name={NAVIGATION.home} component={HomeNavigator} />
       <Tab.Screen name={NAVIGATION.myList} component={MyListNavigator} />
+      <Tab.Screen name={NAVIGATION.movieDetail} component={MovieDetailNavigator} />
+      <Tab.Screen name={NAVIGATION.search} component={SearchNavigator} />
     </Tab.Navigator>
   );
 }
