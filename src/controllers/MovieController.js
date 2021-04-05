@@ -40,7 +40,7 @@ export const getMovies = async TYPE_MOVIE => {
 
 export const getMovieDetails = async movie_id => {
   try {
-    const response = await axios.get(`${THE_MOVIE_DB}${movie_id}`, {
+    const response = await axios.get(`${THE_MOVIE_DB}/movie/${movie_id}`, {
       params: {
         api_key: THE_MOVIE_DB_API_KEY
       }

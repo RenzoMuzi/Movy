@@ -4,9 +4,9 @@ import {
   Text,
   View,
   ScrollView,
-  SafeAreaView,
   ImageBackground,
-  Image
+  Image,
+  RefreshControl
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
@@ -28,7 +28,6 @@ export function MovieDetail({ route }) {
 
   const movieDetails = useSelector(state => getMovieDetailsSelector(state));
   const {
-    imdb_id,
     title,
     poster_path,
     genres,
@@ -37,7 +36,6 @@ export function MovieDetail({ route }) {
     vote_average: voteAverage
   } = movieDetails;
   const poster = `${POSTER_URL}${poster_path}`;
-  console.log('poster:', poster);
 
   return (
     <ScrollView>
@@ -51,13 +49,22 @@ export function MovieDetail({ route }) {
         <Text style={styles.title}>{title}</Text>
       </View>
       <View style={styles.votes}>
-        <Image
-          style={styles.star}
-          source={star}
-        />
+        <Image style={styles.star} source={star} />
+        <Text style={styles.votesAverage}>{voteAverage}</Text>
       </View>
-
-      <Text style={{ color: 'red' }}>{imdb_id}</Text>
+      <View style={styles.genres}>
+        {genres.map((genre, i) => (
+          <View>
+            <Text style={styles.genre}>{`${genre.name}${
+              i !== genres.length - 1 ? ' | ' : ''
+            }`}</Text>
+          </View>
+        ))}
+      </View>
+      <View style={styles.overview}>
+        <Text style={styles.overviewText}>{overview}</Text>
+      </View>
+      <Text style={styles.releaseDate}>Release: {releaseDate}</Text>
     </ScrollView>
   );
 }
