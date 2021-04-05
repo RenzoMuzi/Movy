@@ -10,14 +10,14 @@ export const TYPES = {
 const trendingMovies = movies => {
   return {
     type: TYPES.TRENDING_MOVIE_SUCCESS,
-    payload: { trendingMovies: movies },
+    payload: movies,
   };
 };
 
 const recentlyMovies = movies => {
   return {
     type: TYPES.RECENTLY_MOVIE_SUCCESS,
-    payload: { recentlyMovies: movies },
+    payload: movies ,
   };
 };
 

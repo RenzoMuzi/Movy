@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   getRecentlyMovies,
   getTrendingMovies,
+  getMyMovieList
 } from '@/selectors/MovieSelectors';
 import { getRecently, getTrending } from '@/actions/MovieActions';
 import { HorizontalList } from '@/components/HorizontalList';
@@ -30,6 +31,10 @@ export function Home() {
     return getRecentlyMovies(state);
   });
 
+  const myMovies = useSelector(state => {
+    return getMyMovieList(state);
+  });
+
   return (
     <ScrollView style={[{ backgroundColor: colors.background }]}>
       <View style={{ backgroundColor: 'red' }}>
@@ -37,6 +42,9 @@ export function Home() {
       </View>
       <HorizontalList title="Recently added" items={recentlyMovies} />
       <HorizontalList title="Trending movies" items={trendingMovies} />
+      {myMovies.length > 0 && (
+        <HorizontalList title="My List" items={myMovies} />
+      )}
     </ScrollView>
   );
 }
