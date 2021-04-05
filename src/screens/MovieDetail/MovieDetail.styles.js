@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 export const styles = StyleSheet.create({
   posterContainer: {
     flex: 1,
-    height: 400,
+    height: 500
   },
   gradientMask: {
     backgroundColor: 'transparent',
@@ -14,12 +14,12 @@ export const styles = StyleSheet.create({
     right: 0
   },
   title: {
-    color: "white",
+    color: 'white',
     fontSize: 40,
-    fontWeight: "bold",
-    position: "absolute",
+    fontWeight: 'bold',
+    position: 'absolute',
     bottom: 70,
-    paddingLeft: 15,
+    paddingLeft: 15
   },
   image: {
     flex: 1,
@@ -27,12 +27,41 @@ export const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   votes: {
+    flex: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingRight: 15,
-    paddingLeft: 15
+    paddingLeft: 15,
+    marginBottom: 15
   },
   star: {
-    width: 20,
-    height: 20
+    width: 15,
+    height: 15,
+    marginRight: 10
   },
-  
+  votesAverage: {
+    color: 'yellow',
+    fontWeight: 'bold',
+    fontSize: 15
+  },
+  genres: {
+    flex: 1,
+    flexDirection: 'row',
+    paddingLeft: 15
+  },
+  genre: {
+    color: 'grey'
+  },
+  overview: {
+    padding: 15
+  },
+  overviewText: {
+    color: 'white',
+    fontSize: 18
+  },
+  releaseDate: {
+    color: 'grey',
+    paddingLeft: 15,
+    marginBottom: 25
+  }
 });

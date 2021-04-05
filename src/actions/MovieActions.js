@@ -1,5 +1,8 @@
 import { storage } from '@/storage';
-import { getMovies, getMovieDetails as getMovieDetailsApi } from '@/controllers/MovieController';
+import {
+  getMovies,
+  getMovieDetails as getMovieDetailsApi
+} from '@/controllers/MovieController';
 
 export const TYPES = {
   MOVIE_REQUEST: 'MOVIE_REQUEST',
@@ -8,20 +11,20 @@ export const TYPES = {
   RECENTLY_MOVIE_SUCCESS: 'RECENTLY_MOVIE_SUCCESS',
   MOVIE_DETAILS_SUCCESS: 'MOVIE_DETAILS_SUCCESS',
   MOVIE_DETAILS_PENDING: 'MOVIE_DETAILS_PENDING',
-  MOVIE_DETAILS_REJECTED: 'MOVIE_DETAILS_REJECTED',
+  MOVIE_DETAILS_REJECTED: 'MOVIE_DETAILS_REJECTED'
 };
 
 const trendingMovies = movies => {
   return {
     type: TYPES.TRENDING_MOVIE_SUCCESS,
-    payload: movies,
+    payload: movies
   };
 };
 
 const recentlyMovies = movies => {
   return {
     type: TYPES.RECENTLY_MOVIE_SUCCESS,
-    payload: movies,
+    payload: movies
   };
 };
 
@@ -35,10 +38,17 @@ export const getRecently = () => async dispatch => {
   dispatch(recentlyMovies(movies));
 };
 
-export const getMovieDetails = (movieId) => async dispatch => {
-  const movieDetails = await getMovieDetailsApi(movieId);
-  dispatch({
-    type: TYPES.MOVIE_DETAILS_SUCCESS,
-    payload: movieDetails
-  });
+export const getMovieDetails = movieId => async dispatch => {
+  await dispatch({ type: TYPES.MOVIE_DETAILS_PENDING });
+  try {
+    const movieDetails = await getMovieDetailsApi(movieId);
+    dispatch({
+      type: TYPES.MOVIE_DETAILS_SUCCESS,
+      payload: movieDetails
+    });
+  } catch (error) {
+    dispatch({
+      type: TYPES.MOVIE_DETAILS_REJECTED
+    });
+  }
 };

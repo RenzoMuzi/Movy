@@ -33,7 +33,7 @@ export function Home() {
 
   return (
     <ScrollView style={[{ backgroundColor: colors.background }]}>
-      <FeaturedItem item={trendingMovies[0]} />
+      {/* <FeaturedItem item={trendingMovies[0]} /> */}
       <HorizontalList title="Recently added" items={recentlyMovies} />
       <HorizontalList title="Trending movies" items={trendingMovies} />
     </ScrollView>

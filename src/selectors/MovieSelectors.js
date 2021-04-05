@@ -15,5 +15,7 @@ export const getMyMovieList = state => {
 };
 
 export const getMovieDetails = state => {
-  return state.movies.movieDetails || {}
-}
+  return state.movies.movieDetails || {};
+};
+
+export const isDetailsIsLoading = state => state.movies.detailsIsLoading;

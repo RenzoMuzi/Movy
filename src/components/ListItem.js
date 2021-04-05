@@ -29,7 +29,7 @@ export function ListItem({ item, style, ...rest }) {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate(NAVIGATION.movieDetail, { movieId: item.imdbID })}
+      onPress={() => navigation.navigate(NAVIGATION.movieDetail, { movieId: item.id })}
     >
       <ImageBackground
         source={{ url: GET_IMAGE_IMDB(item.poster_path) }}
