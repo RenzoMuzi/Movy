@@ -58,14 +58,9 @@ export function MovieDetail({ route }) {
 
   return (
     <ScrollView
-    
-    refreshControl={
-      <RefreshControl
-        refreshing={refreshing}
-
-        onRefresh={onRefresh}
-      />
-    }
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+      }
     >
       <View style={styles.posterContainer}>
         <ImageBackground source={{ uri: poster }} style={styles.image}>
