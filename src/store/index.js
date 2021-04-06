@@ -6,9 +6,9 @@ import { rootReducer } from '@/reducers';
 
 const persistConfig = {
   key: 'root',
-  storage,  
+  storage,
   whitelist: ['movies'],
-  blacklist: ['error', 'status']
+  blacklist: ['error', 'status'],
 };
 
 const middlewares = [thunk];

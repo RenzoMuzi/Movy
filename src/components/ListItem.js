@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
-  ImageBackground
+  ImageBackground,
 } from 'react-native';
 import { GET_IMAGE_IMDB, NAVIGATION } from '@/constants';
 
@@ -15,11 +15,11 @@ const styles = StyleSheet.create({
     display: 'flex',
     height: 180,
     marginRight: 5,
-    width: 120
+    width: 120,
   },
   posterBackground: {
-    flex: 1
-  }
+    flex: 1,
+  },
 });
 
 export function ListItem({ item, style, ...rest }) {
@@ -29,7 +29,9 @@ export function ListItem({ item, style, ...rest }) {
   return (
     <TouchableOpacity
       style={styles.container}
-      onPress={() => navigation.navigate(NAVIGATION.movieDetail, { movieId: item.id })}
+      onPress={() =>
+        navigation.navigate(NAVIGATION.movieDetail, { movieId: item.id })
+      }
     >
       <ImageBackground
         source={{ url: GET_IMAGE_IMDB(item.poster_path) }}
@@ -43,9 +45,9 @@ export function ListItem({ item, style, ...rest }) {
 
 ListItem.propTypes = {
   item: PropTypes.object,
-  style: PropTypes.object
+  style: PropTypes.object,
 };
 
 ListItem.defaultProps = {
-  style: null
+  style: null,
 };

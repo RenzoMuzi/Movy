@@ -1,7 +1,7 @@
 import { storage } from '@/storage';
 import {
   getMovies,
-  getMovieDetails as getMovieDetailsApi
+  getMovieDetails as getMovieDetailsApi,
 } from '@/controllers/MovieController';
 
 export const TYPES = {
@@ -11,20 +11,20 @@ export const TYPES = {
   RECENTLY_MOVIE_SUCCESS: 'RECENTLY_MOVIE_SUCCESS',
   MOVIE_DETAILS_SUCCESS: 'MOVIE_DETAILS_SUCCESS',
   MOVIE_DETAILS_PENDING: 'MOVIE_DETAILS_PENDING',
-  MOVIE_DETAILS_REJECTED: 'MOVIE_DETAILS_REJECTED'
+  MOVIE_DETAILS_REJECTED: 'MOVIE_DETAILS_REJECTED',
 };
 
 const trendingMovies = movies => {
   return {
     type: TYPES.TRENDING_MOVIE_SUCCESS,
-    payload: movies
+    payload: movies,
   };
 };
 
 const recentlyMovies = movies => {
   return {
     type: TYPES.RECENTLY_MOVIE_SUCCESS,
-    payload: movies
+    payload: movies,
   };
 };
 
@@ -44,11 +44,11 @@ export const getMovieDetails = movieId => async dispatch => {
     const movieDetails = await getMovieDetailsApi(movieId);
     dispatch({
       type: TYPES.MOVIE_DETAILS_SUCCESS,
-      payload: movieDetails
+      payload: movieDetails,
     });
   } catch (error) {
     dispatch({
-      type: TYPES.MOVIE_DETAILS_REJECTED
+      type: TYPES.MOVIE_DETAILS_REJECTED,
     });
   }
 };

@@ -6,14 +6,14 @@ import {
   ScrollView,
   ImageBackground,
   Image,
-  RefreshControl
+  RefreshControl,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
-import { getMovieDetails, refreshMovieDetails } from '@/actions/MovieActions';
+import { getMovieDetails } from '@/actions/MovieActions';
 import {
   getMovieDetails as getMovieDetailsSelector,
-  isDetailsIsLoading as isDetailsIsLoadingSelector
+  isDetailsIsLoading as isDetailsIsLoadingSelector,
 } from '@/selectors/MovieSelectors';
 import { POSTER_URL } from '@/constants/url';
 import star from '@/assets/ic_ui/ic_star.png';
@@ -36,11 +36,11 @@ export function MovieDetail({ route }) {
     } catch (error) {
       setRefreshing(false);
     }
-  }, []);
+  }, [dispatch, movieId]);
 
   useEffect(() => {
     dispatch(getMovieDetails(movieId));
-  }, []);
+  }, [dispatch, movieId]);
 
   const isDetailsIsLoading = useSelector(state =>
     isDetailsIsLoadingSelector(state)
@@ -53,12 +53,12 @@ export function MovieDetail({ route }) {
     genres,
     overview,
     release_date: releaseDate,
-    vote_average: voteAverage
+    vote_average: voteAverage,
   } = movieDetails;
   const poster = `${POSTER_URL}${poster_path}`;
 
-  if(isDetailsIsLoading || refreshing) {
-    return <Spinner />
+  if (isDetailsIsLoading || refreshing) {
+    return <Spinner />;
   }
 
   return (
@@ -77,7 +77,11 @@ export function MovieDetail({ route }) {
         <Text style={styles.title}>{title}</Text>
       </View>
       <View style={styles.votes}>
-        <Image style={styles.star} source={star} />
+        <Image
+          style={styles.star}
+          source={star}
+          accessibilityIgnoresInvertColors
+        />
         <Text style={styles.votesAverage}>{voteAverage}</Text>
       </View>
       <View style={styles.genres}>
