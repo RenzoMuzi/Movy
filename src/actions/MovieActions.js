@@ -49,7 +49,6 @@ export const removeFromMyList = movie => async dispatch => {
   dispatch(updateMyList(movies));
 };
 
-
 export const getTrending = () => async dispatch => {
   const movies = await getMovies('TRENDING_MOVIES');
   dispatch(trendingMovies(movies));

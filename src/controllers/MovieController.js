@@ -39,7 +39,7 @@ export const removeMovieFromList = movie => {
   let updatedMovieList = [];
   if (storageMovieList) {
     updatedMovieList = storageMovieList;
-    const itemIndex = storageMovieList.findIndex(item => item.id === movie.id)
+    const itemIndex = storageMovieList.findIndex(item => item.id === movie.id);
     if (itemIndex !== -1) {
       updatedMovieList.splice(itemIndex, 1);
     }
@@ -77,7 +77,7 @@ export const getFeaturedMovie = async () => {
   } catch (error) {
     console.log('error', error);
   }
-}
+};
 
 export const getMovieDetails = async movie_id => {
   try {
