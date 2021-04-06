@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { storage } from '@/storage';
 
 const THE_MOVIE_DB = 'https://api.themoviedb.org/3';
 const THE_MOVIE_DB_API_KEY = 'd73cddc6c5f510c3c4470a976bc0c6ad';
@@ -16,6 +17,35 @@ const queryMovies = (path, queryParams) => {
     .catch(error => {
       return error;
     });
+};
+
+export const addMovieToList = movie => {
+  const storageMovieList = storage.getArray('myList');
+  let updatedMovieList = [];
+  if (storageMovieList) {
+    updatedMovieList = storageMovieList;
+    if (storageMovieList.findIndex(item => item.id === movie.id) === -1) {
+      updatedMovieList.push(movie);
+    }
+  } else {
+    updatedMovieList.push(movie);
+  }
+  storage.setArray('myList', updatedMovieList);
+  return updatedMovieList;
+};
+
+export const removeMovieFromList = movie => {
+  const storageMovieList = storage.getArray('myList');
+  let updatedMovieList = [];
+  if (storageMovieList) {
+    updatedMovieList = storageMovieList;
+    const itemIndex = storageMovieList.findIndex(item => item.id === movie.id)
+    if (itemIndex !== -1) {
+      updatedMovieList.splice(itemIndex, 1);
+    }
+  }
+  storage.setArray('myList', updatedMovieList);
+  return updatedMovieList;
 };
 
 export const getMovies = async TYPE_MOVIE => {
@@ -37,6 +67,17 @@ export const getMovies = async TYPE_MOVIE => {
       return recentlyMovies;
   }
 };
+
+export const getFeaturedMovie = async () => {
+  try {
+    const featuredMovie = await queryMovies('movie/now_playing', {
+      api_key: THE_MOVIE_DB_API_KEY,
+    });
+    return featuredMovie[0];
+  } catch (error) {
+    console.log('error', error);
+  }
+}
 
 export const getMovieDetails = async movie_id => {
   try {

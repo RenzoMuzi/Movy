@@ -1,19 +1,32 @@
+import LinearGradient from 'react-native-linear-gradient';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyleSheet, Text, Image, ImageBackground, View } from 'react-native';
-import { addIcon, infoIcon } from '@/assets';
+import { StyleSheet, Text, ImageBackground, View } from 'react-native';
+import { IconText } from '@/components/IconText';
 import { GET_IMAGE_IMDB } from '@/constants';
 
 const styles = StyleSheet.create({
+  actionsContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
   container: {
     backgroundColor: 'lightgray',
     flex: 1,
     height: 520,
   },
   infoContainer: {
-    backgroundColor: 'rgba(3,4,6,0.8)',
     paddingBottom: 5,
     paddingTop: 5,
+  },
+  gradientMask: {
+    backgroundColor: 'transparent',
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
   },
   posterBackground: {
     flex: 1,
@@ -21,33 +34,37 @@ const styles = StyleSheet.create({
   },
   movieTitle: {
     display: 'flex',
-    alignItems: 'center',
-    color: 'red',
-    fontSize: 20,
+    color: 'white',
+    fontSize: 30,
     fontWeight: 'bold',
+    marginRight: 10,
+    marginLeft: 10,
   },
 });
 
-export function FeaturedItem({ item, style, ...rest }) {
+export function FeaturedItem({ item, style, icons, ...rest }) {
   return (
     <View style={styles.container}>
       <ImageBackground
         source={{ url: GET_IMAGE_IMDB(item.poster_path) }}
         style={styles.posterBackground}
       >
+        <LinearGradient
+          colors={['#ffffff00', 'black']}
+          style={styles.gradientMask}
+        />
         <View style={styles.infoContainer}>
           <Text style={styles.movieTitle}>{item.title}</Text>
-          <View>
-            <Image
-              accessibilityIgnoresInvertColors
-              source={addIcon}
-              style={{ tintColor: 'white' }}
-            />
-            <Image
-              accessibilityIgnoresInvertColors
-              source={infoIcon}
-              style={{ tintColor: 'white' }}
-            />
+          <View style={styles.actionsContainer}>
+            {icons &&
+              icons.map(icon => (
+                <IconText
+                  handleOnPress={icon.handleOnPress}
+                  color={icon.color}
+                  icon={icon.icon}
+                  text={icon.text}
+                />
+              ))}
           </View>
         </View>
       </ImageBackground>
@@ -56,10 +73,12 @@ export function FeaturedItem({ item, style, ...rest }) {
 }
 
 FeaturedItem.propTypes = {
+  icons: PropTypes.array,
   item: PropTypes.object,
   style: PropTypes.object,
 };
 
 FeaturedItem.defaultProps = {
   style: null,
+  icons: [],
 };
