@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Image, Text, TouchableOpacity } from 'react-native';
 
 const styles = {
@@ -13,9 +14,9 @@ const styles = {
   },
 };
 
-export function IconText({ color, icon, text }) {
+export function IconText({ color, handleOnPress, icon, text }) {
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity onPress={() => handleOnPress()} style={styles.container}>
       <Image
         accessibilityIgnoresInvertColors
         source={icon}
@@ -28,6 +29,7 @@ export function IconText({ color, icon, text }) {
 
 IconText.propTypes = {
   color: PropTypes.string.isRequired,
+  handleOnPress: PropTypes.func,
   icon: PropTypes.object.isRequired,
   text: PropTypes.string.isRequired,
 };

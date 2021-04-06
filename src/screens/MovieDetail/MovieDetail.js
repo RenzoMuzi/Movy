@@ -16,8 +16,10 @@ import {
 } from '@/selectors/MovieSelectors';
 import { POSTER_URL } from '@/constants/url';
 import star from '@/assets/ic_ui/ic_star.png';
+import { addIcon } from '@/assets';
 import { styles } from '@/screens/MovieDetail/MovieDetail.styles';
 import { Spinner } from '@/components/Spinner';
+import { FeaturedItem } from '@/components/FeaturedItem';
 
 export function MovieDetail({ route }) {
   const { movieId } = route.params;
@@ -44,8 +46,6 @@ export function MovieDetail({ route }) {
   );
 
   const movieDetails = useSelector(state => getMovieDetailsSelector(state));
-  
-  console.log('movieDetails:', movieDetails)
 
   const {
     title,
@@ -55,11 +55,23 @@ export function MovieDetail({ route }) {
     release_date: releaseDate,
     vote_average: voteAverage,
   } = movieDetails;
+
   const poster = `${POSTER_URL}${poster_path}`;
 
   if (isDetailsIsLoading || refreshing) {
     return <Spinner />;
   }
+
+  const featuredIcons = () => {
+    return [
+      {
+        color: 'white',
+        icon: addIcon,
+        text: 'My List',
+        handleOnPress: () => {console.log("testing")}
+      },
+    ];
+  };
 
   return (
     <ScrollView
@@ -67,15 +79,7 @@ export function MovieDetail({ route }) {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <View style={styles.posterContainer}>
-        <ImageBackground source={{ uri: poster }} style={styles.image}>
-          <LinearGradient
-            colors={['#ffffff00', 'black']}
-            style={styles.gradientMask}
-          />
-        </ImageBackground>
-        <Text style={styles.title}>{title}</Text>
-      </View>
+      <FeaturedItem icons={featuredIcons()} item={movieDetails} />
       <View style={styles.votes}>
         <Image
           style={styles.star}
@@ -85,13 +89,14 @@ export function MovieDetail({ route }) {
         <Text style={styles.votesAverage}>{voteAverage}</Text>
       </View>
       <View style={styles.genres}>
-        {genres && genres.map((genre, i) => (
-          <View>
-            <Text style={styles.genre}>{`${genre.name}${
-              i !== genres.length - 1 ? ' | ' : ''
-            }`}</Text>
-          </View>
-        ))}
+        {genres &&
+          genres.map((genre, i) => (
+            <View>
+              <Text style={styles.genre}>{`${genre.name}${
+                i !== genres.length - 1 ? ' | ' : ''
+              }`}</Text>
+            </View>
+          ))}
       </View>
       <View style={styles.overview}>
         <Text style={styles.overviewText}>{overview}</Text>

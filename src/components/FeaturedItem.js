@@ -7,6 +7,11 @@ import { IconText } from '@/components/IconText';
 import { GET_IMAGE_IMDB, NAVIGATION } from '@/constants';
 
 const styles = StyleSheet.create({
+  actionsContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+  },
   container: {
     backgroundColor: 'lightgray',
     flex: 1,
@@ -30,9 +35,11 @@ const styles = StyleSheet.create({
   },
   movieTitle: {
     display: 'flex',
-    color: 'lightgray',
-    fontSize: 20,
+    color: 'white',
+    fontSize: 30,
     fontWeight: 'bold',
+    marginRight: 10,
+    marginLeft: 10,
   },
 });
 
@@ -49,16 +56,11 @@ export function FeaturedItem({ item, style, icons, ...rest }) {
         />
         <View style={styles.infoContainer}>
           <Text style={styles.movieTitle}>{item.title}</Text>
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'center',
-            }}
-          >
+          <View style={styles.actionsContainer}>
             {icons &&
               icons.map(icon => (
                 <IconText
+                  handleOnPress={icon.handleOnPress}
                   color={icon.color}
                   icon={icon.icon}
                   text={icon.text}

@@ -1,5 +1,5 @@
-import { useTheme } from '@react-navigation/native';
-import React, { useEffect } from 'react';
+import { useTheme, useNavigation } from '@react-navigation/native';
+import React, { useState, useEffect } from 'react';
 import { ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { addIcon, infoIcon } from '@/assets';
@@ -10,14 +10,19 @@ import {
   getFeaturedMovie,
 } from '@/selectors/MovieSelectors';
 import {
+  addToMyList,
   getRecently,
   getTrending,
   getFeaturedMovie as queryGetFeaturedMovie,
 } from '@/actions/MovieActions';
 import { HorizontalList } from '@/components/HorizontalList';
+import { FeaturedItem } from '@/components/FeaturedItem';
+import { NAVIGATION } from '@/constants';
 
 export function Home() {
   const { colors } = useTheme();
+  const navigation = useNavigation();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -38,11 +43,17 @@ export function Home() {
         color: 'white',
         icon: addIcon,
         text: 'My List',
+        handleOnPress: addToMyList(featuredMovie),
       },
       {
         color: 'white',
         icon: infoIcon,
         text: 'Info',
+        handleOnPress: () => {
+          navigation.navigate(NAVIGATION.movieDetail, {
+            movieId: featuredMovie.id,
+          });
+        },
       },
     ];
   };

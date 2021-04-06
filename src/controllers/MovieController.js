@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { storage } from '@/storage';
 
 const THE_MOVIE_DB = 'https://api.themoviedb.org/3';
 const THE_MOVIE_DB_API_KEY = 'd73cddc6c5f510c3c4470a976bc0c6ad';
@@ -17,6 +18,17 @@ const queryMovies = (path, queryParams) => {
       return error;
     });
 };
+
+
+
+
+export const addMovieToList = movie => {
+  console.log('movie:', movie);
+  return movie;
+};
+
+
+
 
 export const getMovies = async TYPE_MOVIE => {
   switch (TYPE_MOVIE) {
