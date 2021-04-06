@@ -1,4 +1,3 @@
-import { storage } from '@/storage';
 import {
   getMovies,
   getMovieDetails as getMovieDetailsApi,

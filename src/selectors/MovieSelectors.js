@@ -1,11 +1,6 @@
-export const getTrendingMovies = state => {
-  return state.movies.trendingMovies || [];
-};
+export const getTrendingMovies = state => state.movies.trendingMovies || [];
 
-export const getRecentlyMovies = state => {
-  console.log('state:', state.movies.recentlyMovies);
-  return state.movies.recentlyMovies || [];
-};
+export const getRecentlyMovies = state => state.movies.recentlyMovies || [];
 
 export const getMyMovieList = state => {
   // return state.movies.myList || []
@@ -14,8 +9,6 @@ export const getMyMovieList = state => {
   return [];
 };
 
-export const getMovieDetails = state => {
-  return state.movies.movieDetails || {};
-};
+export const getMovieDetails = state => state.movies.movieDetails || {};
 
 export const isDetailsIsLoading = state => state.movies.detailsIsLoading;
