@@ -41,7 +41,7 @@ export function Home() {
   const myMovieList = useSelector(state => getMyMovieList(state));
 
   const getActionToList = movie => {
-    if (myMovieList.findIndex(item => item.id === movie.id) === -1) {
+    if (myMovieList && myMovieList.length > 0 && myMovieList.findIndex(item => item.id === movie.id) === -1) {
       return {
         color: 'white',
         icon: addIcon,
