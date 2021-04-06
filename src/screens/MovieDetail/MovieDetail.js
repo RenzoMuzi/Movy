@@ -1,4 +1,3 @@
-import { useTheme } from '@react-navigation/native';
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   Text,
@@ -17,12 +16,10 @@ import {
 } from '@/selectors/MovieSelectors';
 import { POSTER_URL } from '@/constants/url';
 import star from '@/assets/ic_ui/ic_star.png';
-import { TextStyles } from '@/theme';
 import { styles } from '@/screens/MovieDetail/MovieDetail.styles';
 import { Spinner } from '@/components/Spinner';
 
 export function MovieDetail({ route }) {
-  const { colors } = useTheme();
   const { movieId } = route.params;
   const dispatch = useDispatch();
 

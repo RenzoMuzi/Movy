@@ -1,16 +1,8 @@
-import { useTheme, useNavigation } from '@react-navigation/native';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Image,
-  ImageBackground,
-  View,
-} from 'react-native';
+import { StyleSheet, Text, Image, ImageBackground, View } from 'react-native';
 import { addIcon, infoIcon } from '@/assets';
-import { GET_IMAGE_IMDB, NAVIGATION } from '@/constants';
+import { GET_IMAGE_IMDB } from '@/constants';
 
 const styles = StyleSheet.create({
   container: {
@@ -37,11 +29,6 @@ const styles = StyleSheet.create({
 });
 
 export function FeaturedItem({ item, style, ...rest }) {
-  const { colors } = useTheme();
-  const navigation = useNavigation();
-
-  console.log('Item: ', item);
-
   return (
     <View style={styles.container}>
       <ImageBackground
