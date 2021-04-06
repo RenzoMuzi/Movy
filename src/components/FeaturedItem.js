@@ -1,10 +1,9 @@
-import { useTheme, useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { StyleSheet, Text, ImageBackground, View } from 'react-native';
 import { IconText } from '@/components/IconText';
-import { GET_IMAGE_IMDB, NAVIGATION } from '@/constants';
+import { GET_IMAGE_IMDB } from '@/constants';
 
 const styles = StyleSheet.create({
   actionsContainer: {

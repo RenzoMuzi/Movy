@@ -3,6 +3,7 @@ import {
   getMovieDetails as getMovieDetailsApi,
   getFeaturedMovie as getFeaturedMovieApi,
   addMovieToList as addMovieToListApi,
+  removeMovieFromList as removeMovieFromListApi,
 } from '@/controllers/MovieController';
 
 export const TYPES = {
@@ -38,18 +39,15 @@ const updateMyList = myList => ({
   payload: myList,
 });
 
-
-
-
-
 export const addToMyList = movie => async dispatch => {
-  const test = await addMovieToListApi(movie);
-  dispatch(updateMyList(test));
+  const movies = await addMovieToListApi(movie);
+  dispatch(updateMyList(movies));
 };
 
-
-
-
+export const removeFromMyList = movie => async dispatch => {
+  const movies = await removeMovieFromListApi(movie);
+  dispatch(updateMyList(movies));
+};
 
 
 export const getTrending = () => async dispatch => {

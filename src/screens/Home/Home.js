@@ -1,19 +1,20 @@
 import { useTheme, useNavigation } from '@react-navigation/native';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { ScrollView } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import { addIcon, infoIcon } from '@/assets';
+import { addIcon, infoIcon, removeIcon } from '@/assets';
 import {
   getRecentlyMovies,
   getTrendingMovies,
-  getMyMovieList,
   getFeaturedMovie,
+  getMyMovieList,
 } from '@/selectors/MovieSelectors';
 import {
   addToMyList,
   getRecently,
   getTrending,
   getFeaturedMovie as queryGetFeaturedMovie,
+  removeFromMyList,
 } from '@/actions/MovieActions';
 import { HorizontalList } from '@/components/HorizontalList';
 import { FeaturedItem } from '@/components/FeaturedItem';
@@ -37,14 +38,28 @@ export function Home() {
 
   const featuredMovie = useSelector(state => getFeaturedMovie(state));
 
-  const featuredIcons = () => {
-    return [
-      {
+  const myMovieList = useSelector(state => getMyMovieList(state));
+
+  const getActionToList = movie => {
+    if (myMovieList.findIndex(item => item.id === movie.id) === -1) {
+      return {
         color: 'white',
         icon: addIcon,
         text: 'My List',
-        handleOnPress: addToMyList(featuredMovie),
-      },
+        handleOnPress: () => dispatch(addToMyList(featuredMovie)),
+      };
+    }
+    return {
+      color: 'white',
+      icon: removeIcon,
+      text: 'My List',
+      handleOnPress: () => dispatch(removeFromMyList(featuredMovie)),
+    };
+  };
+
+  const featuredIcons = () => {
+    return [
+      getActionToList(featuredMovie),
       {
         color: 'white',
         icon: infoIcon,
@@ -63,6 +78,9 @@ export function Home() {
       <FeaturedItem icons={featuredIcons()} item={featuredMovie} />
       <HorizontalList title="Recently added" items={recentlyMovies} />
       <HorizontalList title="Trending movies" items={trendingMovies} />
+      {myMovieList.length > 0 && (
+        <HorizontalList title="My List" items={myMovieList} />
+      )}
     </ScrollView>
   );
 }

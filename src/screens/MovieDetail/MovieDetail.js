@@ -8,15 +8,18 @@ import {
   RefreshControl,
 } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
-import LinearGradient from 'react-native-linear-gradient';
-import { getMovieDetails } from '@/actions/MovieActions';
+import {
+  getMovieDetails,
+  addToMyList,
+  removeFromMyList,
+} from '@/actions/MovieActions';
 import {
   getMovieDetails as getMovieDetailsSelector,
   isDetailsIsLoading as isDetailsIsLoadingSelector,
+  getMyMovieList,
 } from '@/selectors/MovieSelectors';
-import { POSTER_URL } from '@/constants/url';
 import star from '@/assets/ic_ui/ic_star.png';
-import { addIcon } from '@/assets';
+import { addIcon, removeIcon } from '@/assets';
 import { styles } from '@/screens/MovieDetail/MovieDetail.styles';
 import { Spinner } from '@/components/Spinner';
 import { FeaturedItem } from '@/components/FeaturedItem';
@@ -41,36 +44,38 @@ export function MovieDetail({ route }) {
     dispatch(getMovieDetails(movieId));
   }, [dispatch, movieId]);
 
+  const myMovieList = useSelector(state => getMyMovieList(state));
   const isDetailsIsLoading = useSelector(state =>
     isDetailsIsLoadingSelector(state)
   );
-
   const movieDetails = useSelector(state => getMovieDetailsSelector(state));
 
   const {
-    title,
-    poster_path,
     genres,
     overview,
     release_date: releaseDate,
     vote_average: voteAverage,
   } = movieDetails;
 
-  const poster = `${POSTER_URL}${poster_path}`;
-
   if (isDetailsIsLoading || refreshing) {
     return <Spinner />;
   }
 
-  const featuredIcons = () => {
-    return [
-      {
+  const getActionToList = () => {
+    if (myMovieList.findIndex(item => item.id === movieDetails.id) === -1) {
+      return {
         color: 'white',
         icon: addIcon,
         text: 'My List',
-        handleOnPress: () => {console.log("testing")}
-      },
-    ];
+        handleOnPress: () => dispatch(addToMyList(movieDetails)),
+      };
+    }
+    return {
+      color: 'white',
+      icon: removeIcon,
+      text: 'My List',
+      handleOnPress: () => dispatch(removeFromMyList(movieDetails)),
+    };
   };
 
   return (
@@ -79,7 +84,7 @@ export function MovieDetail({ route }) {
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }
     >
-      <FeaturedItem icons={featuredIcons()} item={movieDetails} />
+      <FeaturedItem icons={[getActionToList()]} item={movieDetails} />
       <View style={styles.votes}>
         <Image
           style={styles.star}

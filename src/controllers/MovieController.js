@@ -19,16 +19,34 @@ const queryMovies = (path, queryParams) => {
     });
 };
 
-
-
-
 export const addMovieToList = movie => {
-  console.log('movie:', movie);
-  return movie;
+  const storageMovieList = storage.getArray('myList');
+  let updatedMovieList = [];
+  if (storageMovieList) {
+    updatedMovieList = storageMovieList;
+    if (storageMovieList.findIndex(item => item.id === movie.id) === -1) {
+      updatedMovieList.push(movie);
+    }
+  } else {
+    updatedMovieList.push(movie);
+  }
+  storage.setArray('myList', updatedMovieList);
+  return updatedMovieList;
 };
 
-
-
+export const removeMovieFromList = movie => {
+  const storageMovieList = storage.getArray('myList');
+  let updatedMovieList = [];
+  if (storageMovieList) {
+    updatedMovieList = storageMovieList;
+    const itemIndex = storageMovieList.findIndex(item => item.id === movie.id)
+    if (itemIndex !== -1) {
+      updatedMovieList.splice(itemIndex, 1);
+    }
+  }
+  storage.setArray('myList', updatedMovieList);
+  return updatedMovieList;
+};
 
 export const getMovies = async TYPE_MOVIE => {
   switch (TYPE_MOVIE) {
