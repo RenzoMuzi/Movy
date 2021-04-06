@@ -24,12 +24,11 @@ export function Home() {
     dispatch(getRecently());
     dispatch(getTrending());
     // console.log('trending movies Storage: ', storage.getMap('trendingMovies'));
-  }, []);
+  }, [dispatch]);
 
   const trendingMovies = useSelector(state => getTrendingMovies(state));
 
   const recentlyMovies = useSelector(state => getRecentlyMovies(state));
-
 
   return (
     <ScrollView style={[{ backgroundColor: colors.background }]}>

@@ -12,7 +12,6 @@ import {
 import { addIcon, infoIcon } from '@/assets';
 import { GET_IMAGE_IMDB, NAVIGATION } from '@/constants';
 
-
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'lightgray',
@@ -71,9 +70,9 @@ export function FeaturedItem({ item, style, ...rest }) {
 
 FeaturedItem.propTypes = {
   item: PropTypes.object,
-  style: PropTypes.object
+  style: PropTypes.object,
 };
 
 FeaturedItem.defaultProps = {
-  style: null
+  style: null,
 };
