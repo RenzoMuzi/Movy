@@ -1,12 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import {
-  Text,
-  View,
-  ScrollView,
-  ImageBackground,
-  Image,
-  RefreshControl,
-} from 'react-native';
+import { Text, View, ScrollView, Image, RefreshControl } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getMovieDetails,
